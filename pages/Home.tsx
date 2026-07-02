@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import {
-  SafeAreaView,
   StyleSheet,
   Text,
   View,
+  ScrollView,
 } from "react-native";
-
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Colors from "../theme/color";
 import Spacing from "../theme/spacing";
 import Typography from "../theme/typography";
@@ -33,79 +33,81 @@ const handleSearch = () => {
 };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View>
+      <SafeAreaView style={styles.container}>
+        <ScrollView
+          contentContainerStyle={styles.content}
+          showsVerticalScrollIndicator={false}
+        >
+          <Text style={styles.welcome}>
+            👋 Welcome Back
+          </Text>
 
-        <Text style={styles.welcome}>
-          👋 Welcome Back
-        </Text>
+          <Text style={styles.title}>
+            Business Finder
+          </Text>
 
-        <Text style={styles.title}>
-          Business Finder
-        </Text>
+          <Text style={styles.subtitle}>
+            Search Google Maps businesses instantly.
+          </Text>
 
-        <Text style={styles.subtitle}>
-          Search Google Maps businesses instantly.
-        </Text>
+          <Text style={styles.label}>
+            Search Keyword
+          </Text>
 
-        <Text style={styles.label}>
-          Search Keyword
-        </Text>
+          <SearchInput
+            placeholder="Restaurant in New York"
+            value={query}
+            onChangeText={setQuery}
+          />
 
-        <SearchInput
-          placeholder="Restaurant in New York"
-          value={query}
-          onChangeText={setQuery}
-        />
+          <View style={styles.spacerSmall} />
 
-        <View style={{ height: 20 }} />
+          <Text style={styles.label}>
+            Number of Businesses
+          </Text>
 
-        <Text style={styles.label}>
-          Number of Businesses
-        </Text>
+          <SearchInput
+            placeholder="50"
+            keyboardType="numeric"
+            value={limit}
+            onChangeText={setLimit}
+          />
 
-        <SearchInput
-          placeholder="50"
-          keyboardType="numeric"
-          value={limit}
-          onChangeText={setLimit}
-        />
+          <View style={styles.spacerMedium} />
 
-        <View style={{ height: 30 }} />
+          <PrimaryButton
+            title="Search Businesses"
+            onPress={handleSearch}
+          />
 
-        <PrimaryButton
-          title="Search Businesses"
-          onPress={handleSearch}
-        />
+          <Text style={styles.recentTitle}>
+            Recent Searches
+          </Text>
 
-        <Text style={styles.recentTitle}>
-          Recent Searches
-        </Text>
+          <View style={styles.chipContainer}>
 
-        <View style={styles.chipContainer}>
+            <View style={styles.chip}>
+              <Text style={styles.chipText}>
+                Restaurant
+              </Text>
+            </View>
 
-          <View style={styles.chip}>
-            <Text style={styles.chipText}>
-              Restaurant
-            </Text>
+            <View style={styles.chip}>
+              <Text style={styles.chipText}>
+                Hotel
+              </Text>
+            </View>
+
+            <View style={styles.chip}>
+              <Text style={styles.chipText}>
+                Hospital
+              </Text>
+            </View>
+
           </View>
+        </ScrollView>
+      </SafeAreaView>
 
-          <View style={styles.chip}>
-            <Text style={styles.chipText}>
-              Hotel
-            </Text>
-          </View>
-
-          <View style={styles.chip}>
-            <Text style={styles.chipText}>
-              Hospital
-            </Text>
-          </View>
-
-        </View>
-
-      </View>
-    </SafeAreaView>
   );
 };
 
@@ -116,7 +118,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.background,
+  },
+
+  content: {
     padding: Spacing.lg,
+    paddingBottom: Spacing.xl,
   },
 
   welcome: {
@@ -136,7 +142,7 @@ const styles = StyleSheet.create({
     fontSize: Typography.body,
     color: Colors.text,
     marginTop: 8,
-    marginBottom: 30,
+    marginBottom: 24,
   },
 
   label: {
@@ -152,6 +158,14 @@ const styles = StyleSheet.create({
     fontSize: Typography.subHeading,
     fontWeight: "700",
     color: Colors.title,
+  },
+
+  spacerSmall: {
+    height: 20,
+  },
+
+  spacerMedium: {
+    height: 30,
   },
 
   chipContainer: {
