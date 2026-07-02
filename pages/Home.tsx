@@ -1,0 +1,169 @@
+import React, { useState } from "react";
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+
+import Colors from "../theme/color";
+import Spacing from "../theme/spacing";
+import Typography from "../theme/typography";
+import SearchInput from "../Components/SearchInput";
+import PrimaryButton from "../Components/PrimaryButton";
+
+
+
+const HomeScreen = () => {
+  const [query, setQuery] = useState("");
+  const [limit, setLimit] = useState("");
+
+  const handleSearch = () => {
+    console.log({
+      query,
+      limit,
+    });
+  };
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <View>
+
+        <Text style={styles.welcome}>
+          👋 Welcome Back
+        </Text>
+
+        <Text style={styles.title}>
+          Business Finder
+        </Text>
+
+        <Text style={styles.subtitle}>
+          Search Google Maps businesses instantly.
+        </Text>
+
+        <Text style={styles.label}>
+          Search Keyword
+        </Text>
+
+        <SearchInput
+          placeholder="Restaurant in New York"
+          value={query}
+          onChangeText={setQuery}
+        />
+
+        <View style={{ height: 20 }} />
+
+        <Text style={styles.label}>
+          Number of Businesses
+        </Text>
+
+        <SearchInput
+          placeholder="50"
+          keyboardType="numeric"
+          value={limit}
+          onChangeText={setLimit}
+        />
+
+        <View style={{ height: 30 }} />
+
+        <PrimaryButton
+          title="Search Businesses"
+          onPress={handleSearch}
+        />
+
+        <Text style={styles.recentTitle}>
+          Recent Searches
+        </Text>
+
+        <View style={styles.chipContainer}>
+
+          <View style={styles.chip}>
+            <Text style={styles.chipText}>
+              Restaurant
+            </Text>
+          </View>
+
+          <View style={styles.chip}>
+            <Text style={styles.chipText}>
+              Hotel
+            </Text>
+          </View>
+
+          <View style={styles.chip}>
+            <Text style={styles.chipText}>
+              Hospital
+            </Text>
+          </View>
+
+        </View>
+
+      </View>
+    </SafeAreaView>
+  );
+};
+
+export default HomeScreen;
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    backgroundColor: Colors.background,
+    padding: Spacing.lg,
+  },
+
+  welcome: {
+    fontSize: Typography.small,
+    color: Colors.text,
+    marginTop: 20,
+  },
+
+  title: {
+    fontSize: Typography.title,
+    fontWeight: "700",
+    color: Colors.title,
+    marginTop: 5,
+  },
+
+  subtitle: {
+    fontSize: Typography.body,
+    color: Colors.text,
+    marginTop: 8,
+    marginBottom: 30,
+  },
+
+  label: {
+    fontSize: Typography.body,
+    fontWeight: "600",
+    color: Colors.title,
+    marginBottom: 10,
+  },
+
+  recentTitle: {
+    marginTop: 40,
+    marginBottom: 15,
+    fontSize: Typography.subHeading,
+    fontWeight: "700",
+    color: Colors.title,
+  },
+
+  chipContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
+
+  chip: {
+    backgroundColor: "#DBEAFE",
+    paddingHorizontal: 18,
+    paddingVertical: 10,
+    borderRadius: 30,
+    marginRight: 10,
+    marginBottom: 10,
+  },
+
+  chipText: {
+    color: Colors.primary,
+    fontWeight: "600",
+  },
+
+});

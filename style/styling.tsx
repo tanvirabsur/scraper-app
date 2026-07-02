@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import Colors from "../theme/color";
 
 
 const styles = StyleSheet.create({
@@ -6,20 +7,22 @@ const styles = StyleSheet.create({
       padding: 20,
       backgroundColor: 'black',
    },
-   input: {
-      borderWidth: 1,
-      borderColor: 'gray',
-      padding: 10,
-      marginTop: 10,
-   },
-   greenText: {
-        color: 'green',
-   },
-  btn: {
-      backgroundColor: 'lightgray',
-      padding: 10,
-      marginTop: 10,
-   }
+   container: {
+        height: 58,
+        backgroundColor: "#fff",
+        borderRadius: 14,
+        borderWidth: 1,
+        borderColor: Colors.border,
+        justifyContent: "center",
+        paddingHorizontal: 18,
+        marginTop: 10
+    },
+
+    input: {
+        fontSize: 16,
+        color: Colors.title
+
+    }
 })
 
 export default styles;
