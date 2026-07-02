@@ -6,24 +6,31 @@ import {
   View,
 } from "react-native";
 
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import Colors from "../theme/color";
 import Spacing from "../theme/spacing";
 import Typography from "../theme/typography";
 import SearchInput from "../Components/SearchInput";
 import PrimaryButton from "../Components/PrimaryButton";
+import { RootStackParamList } from "../Components/AppNavigator";
 
 
+type Props = NativeStackScreenProps<
+  RootStackParamList,
+  "Home"
+>;
 
-const HomeScreen = () => {
+
+const HomeScreen = ({ navigation }: Props) => {
   const [query, setQuery] = useState("");
   const [limit, setLimit] = useState("");
 
-  const handleSearch = () => {
-    console.log({
-      query,
-      limit,
-    });
-  };
+const handleSearch = () => {
+  navigation.navigate("Result", {
+    query,
+    limit: Number(limit),
+  });
+};
 
   return (
     <SafeAreaView style={styles.container}>
