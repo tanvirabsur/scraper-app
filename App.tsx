@@ -1,9 +1,16 @@
 import React from 'react';
 import Styles from './style/styling'
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Text, TextInput, View } from 'react-native';
+import { Pressable, Text, TextInput, View } from 'react-native';
 
 export default function App() {
+  const [text, setText] = React.useState('');
+  const [displayText, setDisplayText] = React.useState('');
+
+
+  const handlesubmit = () => {
+    setDisplayText(text);
+  }
 
   return (
     <SafeAreaView style={Styles.body}>
@@ -13,7 +20,15 @@ export default function App() {
         <TextInput
           placeholder="Enter text here..."
           style={Styles.input}
+          value={text}
+          onChangeText={setText}
         />
+
+        <Pressable onPress={() => handlesubmit()} style={Styles.btn}>
+          <Text>Submit</Text>
+        </Pressable>
+
+        <Text>Display Text: {displayText}</Text>
       </View>
     </SafeAreaView>
   );
