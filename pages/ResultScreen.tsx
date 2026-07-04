@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
 
   StyleSheet,
@@ -9,6 +9,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import BusinessTable from "../Components/BusinessTable";
 import Colors from "../theme/color";
 import { Business } from "../types";
+import PreviewBottomSheet from "../Components/PreviewBottomSheet";
 
 const dummyData: Business[] = [
 
@@ -42,12 +43,14 @@ const dummyData: Business[] = [
 ];
 
 const ResultScreen = () => {
+  const [selectedBusiness, setSelectedBusiness] = useState<Business | null>(null);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const handlePreview = (business: Business) => {
-
-    console.log(business);
-
+    setSelectedBusiness(business);
+    setModalVisible(true);
   };
+
 
   return (
 
@@ -68,7 +71,15 @@ const ResultScreen = () => {
         onPreview={handlePreview}
 
       />
-
+      <PreviewBottomSheet
+        visible={modalVisible}
+        business={selectedBusiness}
+        onClose={() => setModalVisible(false)}
+        onViewDetails={() => {
+          setModalVisible(false);
+          // Next Part
+        }}
+      />
     </SafeAreaView>
 
   );
